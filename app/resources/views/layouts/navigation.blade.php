@@ -12,18 +12,22 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Product') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Category') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('User') }}
-                    </x-nav-link>
+                    @auth
+                        @if(auth()->user()->role === 'admin')
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
+                                {{ __('Product') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
+                                {{ __('Category') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                                {{ __('User') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -83,9 +87,22 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')">
+                        {{ __('Product') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
+                        {{ __('Category') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                        {{ __('User') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->

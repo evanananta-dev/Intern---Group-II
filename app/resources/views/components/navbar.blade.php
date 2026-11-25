@@ -9,15 +9,16 @@
         </a>
 
         {{-- Tombol burger (hanya tampil di HP) --}}
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+        <button class="navbar-toggler border-0 shadow-none px-2" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         {{-- Menu --}}
-        <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
-            <div class="d-flex flex-column flex-md-row align-items-stretch align-items-md-center gap-2 mt-3 mt-md-0">
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <div
+                class="nav-actions d-grid d-md-flex align-items-md-center gap-2 ms-md-auto mt-3 mt-md-0 pt-3 pt-md-0 border-top border-md-0">
 
                 @guest
                     <button type="button" class="btn btn-outline-dark rounded-pill px-4 fw-medium" data-bs-toggle="modal"
@@ -34,23 +35,22 @@
                 @auth
                     {{-- Dashboard: hanya admin --}}
                     @if (Auth::user()->role === 'admin')
-                        <a href="{{ route('dashboard') }}"
-                            class="btn btn-dark rounded-pill px-4 fw-medium d-inline-flex justify-content-center align-items-center gap-2">
-                            <span>Dashboard</span>
+                        <a href="{{ route('dashboard') }}" class="btn btn-dark rounded-pill px-4 fw-medium">
+                            Dashboard
                         </a>
                     @endif
 
                     {{-- Profile: semua pengguna login --}}
                     <a href="{{ route('profile.edit') }}"
-                        class="btn btn-outline-dark rounded-circle d-inline-flex justify-content-center align-items-center p-0"
-                        style="width: 40px; height: 40px;" title="Profile" aria-label="Profile">
+                        class="btn btn-outline-dark btn-profile d-inline-flex justify-content-center align-items-center gap-2"
+                        title="Profile" aria-label="Profile">
                         <i class="bi bi-person-fill fs-5"></i>
+                        <span class="d-md-none fw-medium">Profile</span>
                     </a>
                 @endauth
 
             </div>
         </div>
-
     </div>
 </nav>
 
